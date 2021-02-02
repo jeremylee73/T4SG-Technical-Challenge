@@ -4,7 +4,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required
+from helpers import login_required, load_csv
 
 # Configure application
 app = Flask(__name__)
@@ -37,6 +37,7 @@ def index():
 @app.route("/home")
 @login_required
 def home():
+    print(load_csv("MCV1"))
     return render_template("home.html")
 
 @app.route("/profile", methods=["GET", "POST"])
