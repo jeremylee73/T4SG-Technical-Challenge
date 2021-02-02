@@ -18,7 +18,7 @@
       </div>
     </form><br>
     {% for vaccine in all_vaccines %}
-      <form action="/vaccines" method="post" class="center d-inline-block">
+      <form action="/vaccines" method="post" class="side-by-side center d-inline-block">
           <div class="form-group">
               <button class="imgbutton" type="submit" name="{{ vaccine }}"><img class="shrink" src="/static/folder.png"></button>
               <p class="text-white">{{ vaccine }}</p>

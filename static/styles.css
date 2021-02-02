@@ -27,6 +27,12 @@ body
   height: 25%;
 }
 
+.side-by-side
+{
+  float: left;
+  width: 33%;
+}
+
 .imgbutton {
     background-color: Transparent;
     background-repeat:no-repeat;
