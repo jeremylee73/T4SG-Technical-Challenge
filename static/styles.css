@@ -15,3 +15,8 @@ main
     /* Center contents */
     text-align: center;
 }
+
+body
+{
+  background-color: blue;
+}

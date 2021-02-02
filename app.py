@@ -39,6 +39,15 @@ def index():
 def home():
     return render_template("home.html")
 
+@app.route("/profile", methods=["GET", "POST"])
+@login_required
+def profile():
+    """Displays profile"""
+    if request.method == "GET":
+        db.execute("SELECT name, email FROM users WHERE rowid = ?", [session["user_id"]])
+        user = db.fetchall()[0]
+        return render_template("profile.html", user=user)
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Registers user"""
