@@ -150,7 +150,7 @@ def vaccines():
             else:
                 spliced_dict = all_vaccines[vaccine]
             for country in spliced_dict:
-                spliced_dict[country] = spliced_dict[country][2018-end:2018-start]
+                spliced_dict[country] = spliced_dict[country][2018-end:2019-start]
 
             return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=spliced_dict, vaccine_info=vaccines[vaccine], startyear=start, endyear=end)
 
