@@ -31,9 +31,13 @@ connection = sqlite3.connect("who.db", check_same_thread=False)
 db = connection.cursor()
 
 @app.route("/")
-@login_required
 def index():
     return render_template("index.html")
+
+@app.route("/home")
+@login_required
+def home():
+    return render_template("home.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -79,7 +83,7 @@ def register():
 
         flash("Registered!")
 
-        return redirect("/")
+        return redirect("/home")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -114,7 +118,7 @@ def login():
         db.execute("SELECT rowid FROM users WHERE email = ?", [request.form.get("email")])
         session["user_id"] = db.fetchall()[0][0]
 
-        return redirect("/")
+        return redirect("/home")
 
 if __name__ == "__main__":
     app.run(debug=True)
