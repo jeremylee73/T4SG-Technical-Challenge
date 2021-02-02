@@ -4,6 +4,8 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from helpers import login_required
+
 # Configure application
 app = Flask(__name__)
 
@@ -29,6 +31,7 @@ connection = sqlite3.connect("who.db", check_same_thread=False)
 db = connection.cursor()
 
 @app.route("/")
+@login_required
 def index():
     return render_template("index.html")
 
@@ -110,7 +113,7 @@ def login():
         # Remember which user has logged in
         db.execute("SELECT rowid FROM users WHERE email = ?", [request.form.get("email")])
         session["user_id"] = db.fetchall()[0][0]
-        
+
         return redirect("/")
 
 if __name__ == "__main__":
