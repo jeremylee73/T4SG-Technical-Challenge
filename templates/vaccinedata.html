@@ -20,8 +20,8 @@
             <thead>
                 <tr>
                     <th>Country</th>
-                    {% for i in range(vaccine_data["Afghanistan"]|length) %}
-                      <th>{{ 2018 - i }}</th>
+                    {% for i in range(endyear - startyear + 1) %}
+                      <th>{{ endyear - i }}</th>
                     {% endfor %}
                 </tr>
             </thead>

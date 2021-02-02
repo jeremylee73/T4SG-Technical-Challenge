@@ -110,32 +110,32 @@ def vaccines():
                 flash("Data unavailable")
                 return redirect("/vaccines")
             else:
-                return render_template("vaccinedata.html", vaccine=abbr, vaccine_data=all_vaccines[abbr], vaccine_info=vaccines[abbr])
+                return render_template("vaccinedata.html", vaccine=abbr, vaccine_data=all_vaccines[abbr], vaccine_info=vaccines[abbr], startyear=1980, endyear=2018)
 
         if "datasearch" in request.form:
             vaccine = request.form["datasearch"]
             # If nothing is inputted, refresh original page
             if not request.form.get("country") and not request.form.get("startyear") and not request.form.get("endyear"):
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine], startyear=1980, endyear=2018)
 
             # Check that country exists
             country = request.form["country"]
             if country != "" and country not in all_vaccines[vaccine]:
                 flash("Country data not available")
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine], startyear=1980, endyear=2018)
 
             # Check that years are valid
             startyear = request.form["startyear"]
             endyear = request.form["endyear"]
             if startyear != "" and (int(startyear) > 2018 or int(startyear) < 1980):
                 flash("Invalid start year")
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine], startyear=1980, endyear=2018)
             if endyear != "" and (int(endyear) > 2018 or int(endyear) < 1980):
                 flash("Invalid end year")
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine], startyear=1980, endyear=2018)
             if startyear != "" and endyear != "" and int(startyear) > int(endyear):
                 flash("End year must be later than start year")
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine], startyear=1980, endyear=2018)
 
             start = 1980
             if startyear != "":
@@ -152,11 +152,11 @@ def vaccines():
             for country in spliced_dict:
                 spliced_dict[country] = spliced_dict[country][start-1980:end-1979]
 
-            return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=spliced_dict, vaccine_info=vaccines[vaccine])
+            return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=spliced_dict, vaccine_info=vaccines[vaccine], startyear=start, endyear=end)
 
         for vaccine in vaccines:
             if vaccine in request.form:
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine], startyear=1980, endyear=2018)
 
 
 @app.route("/register", methods=["GET", "POST"])
