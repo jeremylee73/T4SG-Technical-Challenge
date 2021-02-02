@@ -9,9 +9,9 @@
       Vaccines
     </div><br>
     {% for vaccine in all_vaccines %}
-      <form action="/vaccines" method="post" class="center">
+      <form action="/vaccines" method="post" class="center d-inline-block">
           <div class="form-group">
-              <a type="submit" name="{{ vaccine }}"><img class="folder" src="/static/folder.png"></a>
+              <a type="submit" name="{{ vaccine }}"><img class="shrink" src="/static/folder.png"></a>
               <p class="text-white">{{ vaccine }}</p>
           </div>
       </form>
