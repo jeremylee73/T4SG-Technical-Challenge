@@ -71,7 +71,8 @@ def register():
         db.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", (request.form.get("name"), request.form.get("email"), generate_password_hash(password)))
         connection.commit()
 
-        #session["user_id"] = db.execute("SELECT id FROM users WHERE name = ?", [request.form.get("name")])[0]["id"]
+        db.execute("SELECT rowid FROM users WHERE email = ?", [request.form.get("email")])
+        session["user_id"] = db.fetchall()[0][0]
 
         flash("Registered!")
 
