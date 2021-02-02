@@ -47,7 +47,7 @@ def register():
         elif not request.form.get("email"):
             flash("Must enter email")
             return redirect("/register")
-        db.execute("SELECT rowid FROM users WHERE email = ?", [request.form.get("email")])
+        db.execute("SELECT * FROM users WHERE email = ?", [request.form.get("email")])
         duplicate = db.fetchall()
         if len(duplicate) > 0:
             flash("Email already taken")
@@ -81,9 +81,36 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Logs user in"""
+
+    # Forgets any user_id
+    session.clear()
+
     if request.method == "GET":
         return render_template("login.html")
     if request.method == "POST":
+        # Ensure email was submitted
+        if not request.form.get("email"):
+            flash("Must enter email")
+            return redirect("/login")
+
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            flash("Must enter password")
+            return redirect("/login")
+
+        # Query database for user
+        db.execute("SELECT * FROM users WHERE email = ?", [request.form.get("email")])
+        rows = db.fetchall()
+
+        # Ensures user exists and password is correct
+        if len(rows) != 1 or not check_password_hash(rows[0][2], request.form.get("password")):
+            flash("Invalid username or password")
+            return redirect("/login")
+
+        # Remember which user has logged in
+        db.execute("SELECT rowid FROM users WHERE email = ?", [request.form.get("email")])
+        session["user_id"] = db.fetchall()[0][0]
+        
         return redirect("/")
 
 if __name__ == "__main__":
