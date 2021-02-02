@@ -1,10 +1,14 @@
 from flask import Flask, flash, redirect, render_template, request, session
+import sqlite3
 
 # Configure application
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+# Configure SQLite database
+db = sqlite3.connect("who.db")
 
 @app.route("/")
 def index():
