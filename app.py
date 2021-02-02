@@ -98,10 +98,20 @@ def vaccines():
     if request.method == "GET":
         return render_template("vaccines.html", all_vaccines=all_vaccines)
     if request.method == "POST":
+        if "search" in request.form:
+            if not request.form.get("abbr"):
+                flash("Must enter vaccine abbr.")
+                return redirect("/vaccines")
+            abbr = request.form.get("abbr")
+            if abbr not in vaccines:
+                flash("Data unavailable")
+                return redirect("/vaccines")
+            else:
+                return render_template("vaccinedata.html", vaccine=abbr, vaccine_data=all_vaccines[abbr], vaccine_info=vaccines[abbr])
+
         for vaccine in vaccines:
             if vaccine in request.form:
                 return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
-        return redirect("/vaccines")
 
 
 @app.route("/register", methods=["GET", "POST"])

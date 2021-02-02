@@ -11,6 +11,12 @@
       </div>
       All data taken from <a href="https://www.kaggle.com/lsind18/who-immunization-coverage">Kaggle</a>
     </div><br>
+    <form action="/vaccines" method="post" class="center">
+      <div class="form-group">
+          <input autocomplete="off" autofocus class="form-control" name="abbr" placeholder="Vaccine Abbr." type="text">
+          <button class="btn btn-primary" type="submit" name="search">Search</button>
+      </div>
+    </form><br>
     {% for vaccine in all_vaccines %}
       <form action="/vaccines" method="post" class="center d-inline-block">
           <div class="form-group">
