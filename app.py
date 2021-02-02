@@ -47,6 +47,32 @@ def profile():
         db.execute("SELECT name, email FROM users WHERE rowid = ?", [session["user_id"]])
         user = db.fetchall()[0]
         return render_template("profile.html", user=user)
+    if request.method == "POST":
+        # Checks that user inputted old and new passwords
+        if not request.form.get("old_password"):
+            flash("Must input old password")
+            return redirect("/profile")
+        if not request.form.get("new_password"):
+            flash("Must input new password")
+            return redirect("/profile")
+
+        old = request.form.get("old_password")
+        db.execute("SELECT password FROM users WHERE rowid = ?", [session["user_id"]])
+        current = db.fetchall()[0][0]
+
+        # Checks that old password matches password in database
+        if not check_password_hash(current, old):
+            flash("Old password does not match")
+            return redirect("/profile")
+
+        new = request.form.get("new_password")
+        new_hash = generate_password_hash(new)
+
+        # Updates to new password
+        db.execute("UPDATE users SET password = ? WHERE rowid = ?", (new_hash, session["user_id"]))
+        flash("Successfully changed password!")
+
+        return redirect("/profile")
 
 @app.route("/vaccines", methods=["GET", "POST"])
 @login_required
