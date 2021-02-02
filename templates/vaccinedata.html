@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Vaccine Data
+{% endblock %}
+
+{% block main %}
+    <div class="section text-white">
+        <h2>Data for {{ vaccine }}</h2><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    {% for i in range(39) %}
+                      <th>{{ 2018 - i }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+              {% for country in vaccine_data %}
+                <tr>
+                  <td>{{ country }}</td>
+                  {% for year in vaccine_data[country] %}
+                    <td>{{ year }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

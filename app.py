@@ -80,13 +80,20 @@ def profile():
 @login_required
 def vaccines():
     """Displays vaccine tracker"""
+    vaccines = ["MCV1", "MCV2", "BCG", "DTP3", "PAB", "PCV3", "HepB3", "Pol3", "Hib3", "ROTAC"]
+
+    # Dictionary of dictionaries for vaccine data
+    all_vaccines = {}
+    for vaccine in vaccines:
+        all_vaccines[vaccine] = load_csv(vaccine)
     if request.method == "GET":
-        vaccines = ["MCV1", "MCV2", "BCG", "DTP3", "PAB", "PCV3", "HepB3", "Pol3", "Hib3", "ROTAC"]
-        # Dictionary of dictionaries for vaccine data
-        all_vaccines = {}
-        for vaccine in vaccines:
-            all_vaccines[vaccine] = load_csv(vaccine)
         return render_template("vaccines.html", all_vaccines=all_vaccines)
+    if request.method == "POST":
+        for vaccine in vaccines:
+            if vaccine in request.form:
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine])
+        return redirect("/vaccines")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
