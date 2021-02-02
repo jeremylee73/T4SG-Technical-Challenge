@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block main %}
-    <h2>Profile</h2><br>
-    Name: {{ user[0] }}<br><br>
-    Email: {{ user[1] }} <br><br>
+    <div class="text-white">
+      <h2>Profile</h2><br>
+      Name: {{ user[0] }}<br><br>
+      Email: {{ user[1] }} <br><br>
+    </div>
     <form action="/profile" method="post" class="center">
         <div class="form-group">
             <input class="form-control" name="old_password" type="password" placeholder="Old Password" autocomplete="off" type="text">
