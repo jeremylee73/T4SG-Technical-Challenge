@@ -48,6 +48,13 @@ def profile():
         user = db.fetchall()[0]
         return render_template("profile.html", user=user)
 
+@app.route("/vaccines", methods=["GET", "POST"])
+@login_required
+def vaccines():
+    """Displays vaccine tracker"""
+    if request.method == "GET":
+        return render_template("vaccines.html")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Registers user"""
