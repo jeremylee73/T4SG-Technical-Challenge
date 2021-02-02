@@ -37,7 +37,6 @@ def index():
 @app.route("/home")
 @login_required
 def home():
-    print(load_csv("MCV1"))
     return render_template("home.html")
 
 @app.route("/profile", methods=["GET", "POST"])
@@ -82,7 +81,12 @@ def profile():
 def vaccines():
     """Displays vaccine tracker"""
     if request.method == "GET":
-        return render_template("vaccines.html")
+        vaccines = ["MCV1", "MCV2", "BCG", "DTP3", "PAB", "PCV3", "HepB3", "Pol3", "Hib3", "ROTAC"]
+        # Dictionary of dictionaries for vaccine data
+        all_vaccines = {}
+        for vaccine in vaccines:
+            all_vaccines[vaccine] = load_csv(vaccine)
+        return render_template("vaccines.html", all_vaccines=all_vaccines)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

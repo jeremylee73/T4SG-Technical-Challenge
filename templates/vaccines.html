@@ -7,5 +7,13 @@
 {% block main %}
     <div class="text-white h2">
       Vaccines
-    </div>
+    </div><br>
+    {% for vaccine in all_vaccines %}
+      <form action="/vaccines" method="post" class="center">
+          <div class="form-group">
+              <a type="submit" name="{{ vaccine }}"><img class="folder" src="/static/folder.png"></a>
+              <p class="text-white">{{ vaccine }}</p>
+          </div>
+      </form>
+    {% endfor %}
 {% endblock %}
