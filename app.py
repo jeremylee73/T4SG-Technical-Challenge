@@ -70,6 +70,8 @@ def profile():
 
         # Updates to new password
         db.execute("UPDATE users SET password = ? WHERE rowid = ?", (new_hash, session["user_id"]))
+        connection.commit()
+
         flash("Successfully changed password!")
 
         return redirect("/profile")
