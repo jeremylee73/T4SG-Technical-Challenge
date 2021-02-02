@@ -51,3 +51,26 @@ table td {
 tbody tr:nth-of-type(odd) {
     background-color: rgb(163, 23, 2, 0.1)
 }
+
+.scrolling
+{
+  overflow: hidden;
+  position: relative;
+  /* Starting position */
+ -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);
+ transform:translateX(100%);
+ /* Apply animation to this element */
+ -moz-animation: scrolling 15s linear infinite;
+ -webkit-animation: scrolling 15s linear infinite;
+ animation: scrolling 15s linear infinite;
+}
+
+/* Move it (define the animation) */
+@-moz-keyframes scrolling {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes scrolling {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }

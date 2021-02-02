@@ -238,6 +238,8 @@ def login():
         db.execute("SELECT rowid FROM users WHERE email = ?", [request.form.get("email")])
         session["user_id"] = db.fetchall()[0][0]
 
+        flash("You're logged in!")
+
         return redirect("/home")
 
 @app.route("/logout")
