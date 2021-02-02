@@ -120,5 +120,15 @@ def login():
 
         return redirect("/home")
 
+@app.route("/logout")
+def logout():
+    """Logs user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to initial page
+    return redirect("/")
+
 if __name__ == "__main__":
     app.run(debug=True)
