@@ -7,12 +7,20 @@
 {% block main %}
     <div class="section text-white">
         <h2>Data for {{ vaccine }}</h2><br>
-        <p>Vaccine Info: {{ vaccine_info }}</p>
+        <p>Vaccine Info: {{ vaccine_info }}</p><br>
+        <form action="/vaccines" method="post" class="center">
+          <div class="form-group">
+              <input autocomplete="off" autofocus class="form-control" name="country" placeholder="Country" type="text">
+              <input autocomplete="off" autofocus class="form-control" name="startyear" placeholder="Start Year" type="text">
+              <input autocomplete="off" autofocus class="form-control" name="endyear" placeholder="End Year" type="text">
+              <button class="btn btn-primary" type="submit" name="datasearch" value="{{ vaccine }}">Search</button>
+          </div>
+        </form><br>
         <table>
             <thead>
                 <tr>
                     <th>Country</th>
-                    {% for i in range(39) %}
+                    {% for i in range(vaccine_data["Afghanistan"]|length) %}
                       <th>{{ 2018 - i }}</th>
                     {% endfor %}
                 </tr>
