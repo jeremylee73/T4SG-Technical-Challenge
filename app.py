@@ -80,7 +80,16 @@ def profile():
 @login_required
 def vaccines():
     """Displays vaccine tracker"""
-    vaccines = ["MCV1", "MCV2", "BCG", "DTP3", "PAB", "PCV3", "HepB3", "Pol3", "Hib3", "ROTAC"]
+    vaccines = {"MCV1": "The percentage of children under 1 year of age who have received at least one dose of measles-containing vaccine in a given year. For countries recommending the first dose of measles vaccine in children over 12 months of age, the indicator is calculated as the proportion of children less than 12-23 months of age receiving one dose of measles-containing vaccine.",
+                "MCV2": "The percentage of children who have received two doses of measles containing vaccine (MCV2) in a given year, according to the nationally recommended schedule.",
+                "BCG": "The percentage of 1-year-olds who have received one dose of bacille Calmette-Guérin (BCG) vaccine in a given year.",
+                "DTP3": "The percentage of 1-year-olds who have received three doses of the combined diphtheria, tetanus toxoid and pertussis vaccine in a given year.",
+                "PAB": "The proportion of neonates in a given year that can be considered as having been protected against tetanus as a result of maternal immunization.",
+                "PCV3": "The percentage of 1-year-olds who have received three doses of pneumococcal conjugate vaccine (PCV3) in a given year.",
+                "HepB3": "The percentage of 1-year-olds who have received three doses of hepatitis B vaccine in a given year.",
+                "Pol3": "The percentage of 1-year-olds who have received three doses of polio vaccine in a given year.",
+                "Hib3": "The percentage of 1-year-olds who have received three doses of Haemophilus influenzae type B vaccine in a given year.",
+                "ROTAC": "The percentage of surviving infants who received the final recommended dose of rotavirus vaccine, which can be either the 2nd or the 3rd dose depending on the vaccine in a given year."}
 
     # Dictionary of dictionaries for vaccine data
     all_vaccines = {}
@@ -91,7 +100,7 @@ def vaccines():
     if request.method == "POST":
         for vaccine in vaccines:
             if vaccine in request.form:
-                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine])
+                return render_template("vaccinedata.html", vaccine=vaccine, vaccine_data=all_vaccines[vaccine], vaccine_info=vaccines[vaccine])
         return redirect("/vaccines")
 
 
