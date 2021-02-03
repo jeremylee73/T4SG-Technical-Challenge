@@ -1,6 +1,6 @@
 # T4SG-Technical-Challenge
 
-My name is Jeremy Lee, and I'm a first year at Harvard College prospectively concentrating in Statistics with a secondary in Economics. This is my technical challenge for T4SG (Tech for Social Good), where I built a web app for the World Health Organization to track the distribution of vaccines.
+Hi! My name is Jeremy Lee, and I'm a first year at Harvard College prospectively concentrating in Statistics with a secondary in Economics. This is my technical challenge for T4SG (Tech for Social Good), where I built a web app for the World Health Organization to track the distribution of vaccines.
 
 # How to run locally
 
@@ -26,3 +26,4 @@ You may access your profile tab once logged in, where you can view your name and
 
 ## Vaccines
 
+Here you can see data from a variety of currently distributed vaccines for diseases including tetanus, measles, and hepatitis B. By clicking on or searching for one of the vaccines, you will be brought to a page with data about that vaccine's global distribution. You may further analyze the results by filtering for particular countries or periods of time. Note that the data available only provides information from the years 1980 to 2018.
